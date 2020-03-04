@@ -16,7 +16,7 @@ window.addEventListener("load", function() {
     response.json().then( function(json) {
       // console.log(json[0])
       let missionTarget = document.getElementById('missionTarget');
-      missionTarget.innerhtml = `<h2>Mission Destination</h2>
+      missionTarget.innerHTML = `<h2>Mission Destination</h2>
       <ol>
          <li>Name: ${json[0].name}</li>
          <li>Diameter: ${json[0].diameter}</li>
@@ -26,7 +26,7 @@ window.addEventListener("load", function() {
       </ol>
       <img src="${json[0].image}">
       `;
-      console.log(missionTarget.innerhtml)
+      console.log(missionTarget.innerHTML)
       //missionTarget.innerhtml = '<h2>Mission Destination</h2>'
       //console.log(missionTarget.innerhtml)
     });
