@@ -12,8 +12,8 @@
 <img src="${}">
 */
 window.addEventListener("load", function() {
-  fetch('https://handlers.education.launchcode.org/static/planets.json').then( function(response){
-    response.json().then( function(json) {
+  fetch('https://handlers.education.launchcode.org/static/planets.json').then(function(response) {
+    response.json().then(function(json) {
       // console.log(json[0])
       let missionTarget = document.getElementById('missionTarget');
       missionTarget.innerHTML = `<h2>Mission Destination</h2>
@@ -39,33 +39,41 @@ window.addEventListener("load", function() {
     let copilotName = document.querySelector('input[name=copilotName]');
     let fuelLevel = document.querySelector('input[name=fuelLevel]');
     let cargoMass = document.querySelector('input[name=cargoMass]');
-    if( pilotName.value === '' || copilotName.value === '' || fuelLevel.value === '' || cargoMass.value ===''){
+    if (pilotName.value === '' || copilotName.value === '' || fuelLevel.value === '' || cargoMass.value === '') {
       alert('All Fields Required!!')
       event.preventDefault();
     }
-    if (isNaN(Number(cargoMass.value)) || isNaN(Number(fuelLevel.value))){
+    if (isNaN(Number(cargoMass.value)) || isNaN(Number(fuelLevel.value))) {
       console.log(cargoMass.value);
       alert('Please Enter Numbers for Cargo Mass and Fuel Level');
       event.preventDefault();
     }
     faultyItems.childNodes[1].childNodes[1].textContent = `Pilot ${pilotName.value} is ready for launch`;
     faultyItems.childNodes[1].childNodes[3].textContent = `Copilot ${copilotName.value} is ready for launch`;
-    if (Number(fuelLevel.value)<10000){
+    if (Number(fuelLevel.value) < 10000) {
       //console.log(faultyItems.childNodes[1].childNodes[3]);
       faultyItems.style.visibility = 'visible';
       let fuelStatus = document.getElementById('fuelStatus');
       //console.log(fuelStatus.textContent);
-      fuelStatus.textContent = 'Fuel Level too low for launch!';
+      fuelStatus.textContent = 'Fuel Level too low for launch';
       launchStatus.style.color = 'red';
       launchStatus.textContent = 'Shuttle not ready for launch';
       event.preventDefault();
     }
-    if (Number(cargoMass.value>10000)){
+    else{
+      let fuelStatus = document.getElementById('fuelStatus');
+      fuelStatus.textContent = 'Fuel level high enough for launch';
+    }
+    if (Number(cargoMass.value > 10000)) {
+      faultyItems.style.visibility = 'visible';
       launchStatus.style.color = 'red';
       launchStatus.textContent = 'Shuttle not ready for launch';
       let cargoStatus = document.getElementById('cargoStatus');
       cargoStatus.textContent = 'Cargo mass too high for launch';
       event.preventDefault();
+    }else {
+      let cargoStatus = document.getElementById('cargoStatus');
+      cargoStatus.textContent = 'Cargo mass low enough for launch';
     }
   });
 });
